@@ -13,8 +13,7 @@ class World(object):
         self._load_all_players()
 
     def _load_all_players(self):
-        stats_dir = os.path.join(config.MINECRAFT_WORLD_DIR_PATH, 'stats')
-        for filename in os.listdir(stats_dir):
+        for filename in os.listdir(config.STATS_DIR_PATH):
             if filename[-5:] == '.json' and len(filename) > 5:
-                fullpath = os.path.join(stats_dir, filename)
+                fullpath = os.path.join(config.STATS_DIR_PATH, filename)
                 self.players.append(Player(filepath=fullpath))
