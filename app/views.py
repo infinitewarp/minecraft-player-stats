@@ -19,7 +19,17 @@ def wrap_data_access(func):
 @wrap_data_access
 def world_html():
     world = World()
-    return render_template('world.html', players=world.players)
+
+    # get the top 10 players for each category
+    most_online = world.players_most_online(10)
+    most_blocks = world.players_most_broken_blocks(10)
+    greatest_distance = world.players_greatest_distance(10)
+
+    return render_template('world.html', players=world.players,
+                           most_online=most_online,
+                           most_blocks=most_blocks,
+                           greatest_distance=greatest_distance,
+                           )
 
 
 @app.route('/player/<username>.json', methods=['GET'])

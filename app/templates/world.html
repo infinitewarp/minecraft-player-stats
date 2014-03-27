@@ -11,5 +11,23 @@
             <li><a href="/player/{{player.username}}">{{player.username}}</a></li>
         {% endfor %}
         </ul>
+        <div>Top {{most_online|length}} players who have spent the most time online:</div>
+        <ul>
+        {% for username, minutes in most_online %}
+            <li><a href="/player/{{username}}">{{username}}</a> ({{minutes}} minutes)</li>
+        {% endfor %}
+        </ul>
+        <div>Top {{most_blocks|length}} players who have broken the most blocks:</div>
+        <ul>
+        {% for username, blocks in most_blocks %}
+            <li><a href="/player/{{username}}">{{username}}</a> ({{blocks}} blocks)</li>
+        {% endfor %}
+        </ul>
+        <div>Top {{greatest_distance|length}} players who have travelled the greatest distances:</div>
+        <ul>
+        {% for username, meters in greatest_distance %}
+            <li><a href="/player/{{username}}">{{username}}</a> ({{meters}} meters)</li>
+        {% endfor %}
+        </ul>
     </body>
 </html>
