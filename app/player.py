@@ -4,10 +4,6 @@ import config
 from util import tree
 
 
-class IllegalAccessException(Exception):
-    pass
-
-
 class Player(object):
     """
     Representation of a player based on his stats.
@@ -23,6 +19,8 @@ class Player(object):
         self._load()
 
     def _filepath_from_username(self, username):
+        if len(os.path.split(username)[0]) > 1:
+            raise IOError()
         # eg. "/foo/bar/minecraft/world/stats/notch.json"
         return os.path.join(config.STATS_DIR_PATH, username + '.json')
 
@@ -34,10 +32,6 @@ class Player(object):
         """
         Load the player's stats data from disk.
         """
-        if '..' in self.filepath:
-            # Don't let someone try to walk up the path!
-            # TODO Is there a better way to do this?
-            raise IllegalAccessException("Illegal access to: %s" % self.filepath)
         with open(self.filepath, 'r') as f:
             data = json.load(f)
             for key, value in data.iteritems():

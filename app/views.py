@@ -1,7 +1,7 @@
 from app import app
 from flask import abort, jsonify, render_template
 from functools import wraps
-from player import Player, IllegalAccessException
+from player import Player
 
 
 def wrap_data_access(func):
@@ -9,8 +9,6 @@ def wrap_data_access(func):
     def wrapped(*args, **kwds):
         try:
             return func(*args, **kwds)
-        except IllegalAccessException as e:
-            app.logger.info(e.message)
         except IOError:
             abort(404)
     return wrapped
