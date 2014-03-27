@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>World Stats</title>
+    </head>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <body>
+        <div id="heading">Here are the players for the world!</div>
+        <ul id="players">
+        {% for player in players %}
+            <li><a href="/player/{{player.username}}">{{player.username}}</a></li>
+        {% endfor %}
+        </ul>
+    </body>
+</html>

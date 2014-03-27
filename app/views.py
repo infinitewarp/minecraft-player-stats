@@ -2,6 +2,7 @@ from app import app
 from flask import abort, jsonify, render_template
 from functools import wraps
 from player import Player
+from world import World
 
 
 def wrap_data_access(func):
@@ -12,6 +13,13 @@ def wrap_data_access(func):
         except IOError:
             abort(404)
     return wrapped
+
+
+@app.route('/', methods=['GET'])
+@wrap_data_access
+def world_html():
+    world = World()
+    return render_template('world.html', players=world.players)
 
 
 @app.route('/player/<username>.json', methods=['GET'])
