@@ -23,7 +23,9 @@ class World(object):
         return sorted(players, key=lambda player: player[1], reverse=True)[0:count]
 
     def players_most_online(self, count):
-        valuefunc = lambda player: player.data['stat']['playOneMinute']
+        # Weird bug in minecraft! Even though the stat says "playOneMinute",
+        # the value is the time in milliminutes. Yes, you read that right.
+        valuefunc = lambda player: player.data['stat']['playOneMinute']/1000
         return self._get_top_players(count, valuefunc)
 
     def players_most_broken_blocks(self, count):
