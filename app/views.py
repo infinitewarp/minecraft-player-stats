@@ -42,5 +42,10 @@ def player_json(username):
 @app.route('/player/<username>', methods=['GET'])
 @wrap_data_access
 def player_html(username):
-    player = Player(username)
-    return render_template('player.html', player_name=player.username, data=player.data)
+    world = World()
+    if username not in world.players:
+        abort(404)
+    player = world.players[username]
+    return render_template('player.html', players=world.players,
+                           player=player,
+                           )

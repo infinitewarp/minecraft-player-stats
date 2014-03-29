@@ -1,11 +1,8 @@
 {% extends "layout.html" %}
-{% block title %}{{player_name}} Stats{% endblock %}
-{% block navbar %}{% endblock %}
+{% block title %}{{player.username}} Stats{% endblock %}
 {% block maincontent %}
-<div id="heading">Here are some stats for {{player_name}}!</div>
-<div id="data"></div>
-{% endblock %}
-{% block footer %}
-{{ super() }}
-<script src="/static/js/main.js" async onload="loadPlayerData('{{player_name}}')"></script>
+<div class="container-fluid" role="main">
+    <div id="heading">Here are some stats for {{player.username}}!</div>
+    <div id="data">{{player.data}}</div>
+</div>
 {% endblock %}
