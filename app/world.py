@@ -9,17 +9,18 @@ class World(object):
     a collection of Players and their stats within that world.
     """
     def __init__(self):
-        self.players = []
+        self.players = {}
         self._load_all_players()
 
     def _load_all_players(self):
         for filename in os.listdir(config.STATS_DIR_PATH):
             if filename[-5:] == '.json' and len(filename) > 5:
                 fullpath = os.path.join(config.STATS_DIR_PATH, filename)
-                self.players.append(Player(filepath=fullpath))
+                player = Player(filepath=fullpath)
+                self.players[player.username] = player
 
     def _get_top_players(self, count, valuefunc):
-        players = [(player.username, valuefunc(player)) for player in self.players]
+        players = [(username, valuefunc(player)) for username, player in self.players.iteritems()]
         return sorted(players, key=lambda player: player[1], reverse=True)[0:count]
 
     def players_most_online(self, count):
