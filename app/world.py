@@ -33,6 +33,18 @@ class World(object):
         valuefunc = lambda player: sum(player.data['stat']['mineBlock'].values())
         return self._get_top_players(count, valuefunc)
 
+    def players_most_crafted_items(self, count):
+        valuefunc = lambda player: sum(player.data['stat']['craftItem'].values())
+        return self._get_top_players(count, valuefunc)
+
     def players_greatest_distance(self, count):
         valuefunc = lambda player: sum([value for key, value in player.data['stat'].iteritems() if key[-5:] == 'OneCm'])/1000
+        return self._get_top_players(count, valuefunc)
+
+    def players_most_kills(self, count):
+        valuefunc = lambda player: sum(kill[1] for kill in player.kills)
+        return self._get_top_players(count, valuefunc)
+
+    def players_most_deaths(self, count):
+        valuefunc = lambda player: player.data['stat']['deaths'] if isinstance(player.data['stat']['deaths'], int) else 0
         return self._get_top_players(count, valuefunc)

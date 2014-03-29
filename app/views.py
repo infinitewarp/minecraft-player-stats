@@ -22,13 +22,19 @@ def world_html():
 
     # get the top 10 players for each category
     most_online = world.players_most_online(10)
-    most_blocks = world.players_most_broken_blocks(10)
+    most_broken = world.players_most_broken_blocks(10)
+    most_crafted = world.players_most_crafted_items(10)
     greatest_distance = world.players_greatest_distance(10)
+    most_kills = world.players_most_kills(10)
+    most_deaths = world.players_most_deaths(10)
 
     return render_template('world.html', players=world.players,
                            most_online=most_online,
-                           most_blocks=most_blocks,
+                           most_broken=most_broken,
+                           most_crafted=most_crafted,
                            greatest_distance=greatest_distance,
+                           most_kills=most_kills,
+                           most_deaths=most_deaths,
                            )
 
 

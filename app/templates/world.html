@@ -26,11 +26,52 @@
         <div class="col-sm-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><span class="fa fa-wrench"></span> Top {{most_blocks|length}} Miners</h3>
+                    <h3 class="panel-title"><span class="fa fa-globe"></span> Top {{most_broken|length}} Miners</h3>
                 </div>
                 <div class="list-group">
-                    {% for username, blocks in most_blocks %}
+                    {% for username, blocks in most_broken %}
                     <a href="/player/{{username}}" class="list-group-item">{{username}} ({{"%d"|format(blocks/1000)}}k blocks)</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="fa fa-cog"></span> Top {{most_crafted|length}} Crafters</h3>
+                </div>
+                <div class="list-group">
+                    {% for username, items in most_crafted %}
+                    <a href="/player/{{username}}" class="list-group-item">{{username}} ({{"%d"|format(items/1000)}}k items)</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End row of stats -->
+
+    <!-- Second row of stats -->
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="fa fa-shield"></span> Top {{most_kills|length}} Murderers</h3>
+                </div>
+                <div class="list-group">
+                    {% for username, kills in most_kills %}
+                    <a href="/player/{{username}}" class="list-group-item">{{username}} ({{kills}} kills)</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="fa fa-frown-o"></span> Top {{most_deaths|length}} Dirtnappers</h3>
+                </div>
+                <div class="list-group">
+                    {% for username, deaths in most_deaths %}
+                    <a href="/player/{{username}}" class="list-group-item">{{username}} ({{deaths}} deaths)</a>
                     {% endfor %}
                 </div>
             </div>
