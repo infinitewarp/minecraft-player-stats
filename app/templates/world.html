@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% from 'macros.html' import avatar %}
 {% block title %}World Stats{% endblock %}
 {% block maincontent %}
 <!-- Start main page container -->
@@ -18,7 +19,7 @@
                 </div>
                 <div class="list-group">
                     {% for username, minutes in most_online %}
-                    <a href="/player/{{username}}" class="list-group-item">{{username}} ({{"%d"|format(minutes/60)}} hrs)</a>
+                    <a href="/player/{{username}}" class="list-group-item">{{avatar(username, 16)}} {{username}} ({{"%d"|format(minutes/60)}} hrs)</a>
                     {% endfor %}
                 </div>
             </div>
@@ -30,7 +31,7 @@
                 </div>
                 <div class="list-group">
                     {% for username, blocks in most_broken %}
-                    <a href="/player/{{username}}" class="list-group-item">{{username}} ({{"%d"|format(blocks/1000)}}k blocks)</a>
+                    <a href="/player/{{username}}" class="list-group-item">{{avatar(username, 16)}} {{username}} ({{"%d"|format(blocks/1000)}}k blocks)</a>
                     {% endfor %}
                 </div>
             </div>
@@ -42,7 +43,7 @@
                 </div>
                 <div class="list-group">
                     {% for username, items in most_crafted %}
-                    <a href="/player/{{username}}" class="list-group-item">{{username}} ({{"%d"|format(items/1000)}}k items)</a>
+                    <a href="/player/{{username}}" class="list-group-item">{{avatar(username, 16)}} {{username}} ({{"%d"|format(items/1000)}}k items)</a>
                     {% endfor %}
                 </div>
             </div>
@@ -59,7 +60,7 @@
                 </div>
                 <div class="list-group">
                     {% for username, kills in most_kills %}
-                    <a href="/player/{{username}}" class="list-group-item">{{username}} ({{kills}} kills)</a>
+                    <a href="/player/{{username}}" class="list-group-item">{{avatar(username, 16)}} {{username}} ({{kills}} kills)</a>
                     {% endfor %}
                 </div>
             </div>
@@ -71,7 +72,7 @@
                 </div>
                 <div class="list-group">
                     {% for username, deaths in most_deaths %}
-                    <a href="/player/{{username}}" class="list-group-item">{{username}} ({{deaths}} deaths)</a>
+                    <a href="/player/{{username}}" class="list-group-item">{{avatar(username, 16)}} {{username}} ({{deaths}} deaths)</a>
                     {% endfor %}
                 </div>
             </div>
@@ -83,7 +84,7 @@
                 </div>
                 <div class="list-group">
                     {% for username, meters in greatest_distance %}
-                    <a href="/player/{{username}}" class="list-group-item">{{username}} ({{"%d"|format(meters/1000)}} km)</a>
+                    <a href="/player/{{username}}" class="list-group-item">{{avatar(username, 16)}} {{username}} ({{"%d"|format(meters/1000)}} km)</a>
                     {% endfor %}
                 </div>
             </div>
