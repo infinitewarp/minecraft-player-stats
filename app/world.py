@@ -51,3 +51,6 @@ class World(object):
     def players_most_deaths(self, count):
         valuefunc = lambda player: player.data['stat']['deaths'] if isinstance(player.data['stat']['deaths'], int) else 0
         return self._get_top_players(count, valuefunc)
+
+    def usernames(self):
+        return sorted(self.players.keys(), key=lambda username: username.lower())

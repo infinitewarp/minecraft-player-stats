@@ -20,7 +20,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> Players <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        {% for username in players %}
+                        {% for username in usernames %}
                         <li><a href="/player/{{username}}">{{username}}</a></li>
                         {% endfor %}
                     </ul>
