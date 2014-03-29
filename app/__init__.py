@@ -1,11 +1,15 @@
-from flask import Flask
+import os
+
 from beaker.cache import CacheManager
 from beaker.util import parse_cache_config_options
+from flask import Flask
+
+import config
 
 cache_opts = {
     'cache.type': 'file',
-    'cache.data_dir': '/tmp/minecraft-player-stats/data',
-    'cache.lock_dir': '/tmp/minecraft-player-stats/lock'
+    'cache.data_dir': os.path.join(config.TEMP_DIR, 'data'),
+    'cache.lock_dir': os.path.join(config.TEMP_DIR, 'lock'),
 }
 
 cache = CacheManager(**parse_cache_config_options(cache_opts))

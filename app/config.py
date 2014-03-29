@@ -1,4 +1,5 @@
 import os
+import tempfile
 
 # TODO get this path from somewhere else?
 MINECRAFT_WORLD_DIR_PATH = os.path.expanduser('~/Dropbox/Development/world')
@@ -13,3 +14,6 @@ NAVBAR_LINKS = [
 
 # This is the name of your server as it will show on the front page
 SERVER_NAME = 'My Great Server'
+
+# The app needs to be able to write temporary cache data to disk
+TEMP_DIR = os.path.join(tempfile.gettempdir(), 'minecraft-player-stats')
