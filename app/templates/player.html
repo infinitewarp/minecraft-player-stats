@@ -2,7 +2,53 @@
 {% block title %}{{player.username}} Stats{% endblock %}
 {% block maincontent %}
 <div class="container-fluid" role="main">
-    <div id="heading">Here are some stats for {{player.username}}!</div>
-    <div id="data">{{player.data}}</div>
+    <div class="jumbotron"><h1>{{player.username}}'s Stats!</h1></div>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="fa fa-trophy"></span> Achievements</h3>
+                </div>
+                <ul class="list-group">
+                    {% for achievement in player.achievements %}
+                    <li class="list-group-item">{{achievement}}</li>
+                    {% else %}
+                    <li class="list-group-item">Nothing yet! <span class="fa fa-thumbs-down"></span></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="fa fa-dot-circle-o"></span> Kills</h3>
+                </div>
+                <ul class="list-group">
+                    {% for entity, count in player.kills %}
+                    <li class="list-group-item">{{count}} {{entity}}</li>
+                    {% else %}
+                    <li class="list-group-item">Nothing yet! <span class="fa fa-thumbs-down"></span></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="fa fa-shield"></span> Killed By</h3>
+                </div>
+                <ul class="list-group">
+                    {% for entity, count in player.killed_by %}
+                    <li class="list-group-item">{{count}} {{entity}}</li>
+                    {% else %}
+                    <li class="list-group-item">Nothing yet! <span class="fa fa-thumbs-up"></span></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div>{{player.data}}</div>
 </div>
 {% endblock %}

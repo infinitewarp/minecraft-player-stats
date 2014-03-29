@@ -1,6 +1,7 @@
 import os
 import json
 import config
+from app.misc import ACHIEVEMENT_NAMES, ENTITY_NAMES
 from util import tree
 
 
@@ -48,3 +49,19 @@ class Player(object):
                 node[subkey]
             node = node[subkey]
         node[subkeys[-1]] = value
+
+    @property
+    def achievements(self):
+        # TODO How should achievements be sorted?
+        # TODO Handle the special 'exploreAllBiomes' achievement
+        return [ACHIEVEMENT_NAMES[name] for name, value in self.data['achievement'].iteritems() if isinstance(value, int) and value > 0]
+
+    @property
+    def kills(self):
+        entities = [(ENTITY_NAMES[name], value) for name, value in self.data['stat']['killEntity'].iteritems()]
+        return sorted(entities, key=lambda entity: entity[1], reverse=True)
+
+    @property
+    def killed_by(self):
+        entities = [(ENTITY_NAMES[name], value) for name, value in self.data['stat']['entityKilledBy'].iteritems()]
+        return sorted(entities, key=lambda entity: entity[1], reverse=True)
