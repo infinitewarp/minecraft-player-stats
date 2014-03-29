@@ -1,4 +1,4 @@
-from app import app
+from app import app, config
 from flask import abort, jsonify, render_template
 from functools import wraps
 from player import Player
@@ -28,7 +28,7 @@ def world_html():
     most_kills = world.players_most_kills(10)
     most_deaths = world.players_most_deaths(10)
 
-    return render_template('world.html', players=world.players,
+    return render_template('world.html', config=config, players=world.players,
                            most_online=most_online,
                            most_broken=most_broken,
                            most_crafted=most_crafted,
@@ -52,6 +52,6 @@ def player_html(username):
     if username not in world.players:
         abort(404)
     player = world.players[username]
-    return render_template('player.html', players=world.players,
+    return render_template('player.html', config=config, players=world.players,
                            player=player,
                            )

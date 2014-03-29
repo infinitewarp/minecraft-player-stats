@@ -12,6 +12,11 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
+                {% for text, url in config.NAVBAR_LINKS %}
+                <li>
+                    <a href="{{ url }}">{{ text }}</a>
+                </li>
+                {% endfor %}
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> Players <b class="caret"></b></a>
                     <ul class="dropdown-menu">
