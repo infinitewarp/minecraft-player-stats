@@ -1,5 +1,6 @@
 import os
 import config
+from app import cache
 from player import Player
 
 
@@ -9,15 +10,17 @@ class World(object):
     a collection of Players and their stats within that world.
     """
     def __init__(self):
-        self.players = {}
-        self._load_all_players()
+        self.players = self._load_all_players()
 
+    @cache.cache('world_load_all_players', expire=300)
     def _load_all_players(self):
+        players = {}
         for filename in os.listdir(config.STATS_DIR_PATH):
             if filename[-5:] == '.json' and len(filename) > 5:
                 fullpath = os.path.join(config.STATS_DIR_PATH, filename)
                 player = Player(filepath=fullpath)
-                self.players[player.username] = player
+                players[player.username] = player
+        return players
 
     def _get_top_players(self, count, valuefunc):
         players = [(username, valuefunc(player)) for username, player in self.players.iteritems()]
