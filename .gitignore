@@ -2,8 +2,8 @@
 *.pyc
 *.pyo
 
-# the virtualenv we should be using
-flaskenv
+# the default virtual environment directory
+webappenv
 
 # pesky mac files
 .DS_Store

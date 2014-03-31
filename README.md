@@ -21,10 +21,28 @@ Because minecraft-player-stats reads player stats from disk instead of interfaci
 Installation
 ------------
 
-You must have an environment with a reasonably modern version of Python 2.x and virtualenv available. More specific details to come. The setup script will create a virtual environment and will pip install any dependencies there. At this point, installation basically consists of:
+Your system must have a reasonably modern version of Python 2.x and virtualenv available. The setup script uses the default "virtualenv" in your path to create and manage a virtual evironment in the local "webappenv" directory. You can override these locations by exporting VIRTUALENV_BIN and ENV_DIR respectively before running the setup script.
 
+Running setup with defaults is as simple as:
 ```bash
 ./setup.sh
 ```
 
-You may need to change the "virtualenv" executable in setup.sh to the appropriate name (like "virtualenv-2.6") if your system has multiple versions of Python installed.
+If you want to override the default virtualenv binary and webappenv directory, you might do something like:
+```bash
+export VIRTUALENV_BIN=/usr/bin/virtualenv-2.6
+export ENV_DIR=~/.virtualenvs/minecraft-player-stats
+./setup.sh
+```
+
+Running
+-------
+
+To run using the built-in Python webserver, activate your virtual environment and exectue the run script. Using the default local "webappenv" directory for the virtual environment, for example:
+
+```bash
+. ./webappenv/bin/activate
+./run.sh
+```
+
+Be aware that the run.sh script uses the built-in Python webserver in the foreground of your shell and is only advisable for testing. Deployments for public traffic should run behind a proper WSGI server like Gunicorn or mod_wsgi.
