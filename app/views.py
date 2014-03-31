@@ -2,6 +2,7 @@ from app import app, config
 from flask import abort, jsonify, render_template
 from functools import wraps
 from player import Player
+from profile import Profile, ProfileNotFound
 from world import World
 
 
@@ -60,3 +61,23 @@ def player_html(username):
     return render_template('player.html', config=config, usernames=usernames,
                            player=player,
                            )
+
+
+@app.route('/player/<username>/profile.json', methods=['GET'])
+@wrap_data_access
+def player_profile_json(username):
+    try:
+        profile = Profile(username=username)
+    except ProfileNotFound:
+        abort(404)
+    return jsonify(profile.data)
+
+
+@app.route('/profile/<uuid>.json', methods=['GET'])
+@wrap_data_access
+def profile_json_from_uuid(uuid):
+    try:
+        profile = Profile(uuid=uuid)
+    except ProfileNotFound:
+        abort(404)
+    return jsonify(profile.data)
