@@ -1,8 +1,9 @@
 {% extends "layout.html" %}
+{% from 'macros.html' import avatar %}
 {% block title %}{{player.username}} Stats{% endblock %}
 {% block maincontent %}
 <div class="container-fluid" role="main">
-    <div class="jumbotron"><h1>{{player.username}}'s Stats!</h1></div>
+    <div class="jumbotron"><h1>{{avatar(player.username, 48)}} {{player.username}}'s Stats!</h1></div>
 
     <div class="row">
         <div class="col-sm-3">
