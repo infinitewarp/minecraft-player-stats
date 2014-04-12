@@ -1,6 +1,9 @@
-from app import cache, app
 import json
+
 import requests
+
+from app import app, cache
+
 
 # TODO Load these from config?
 MOJANG_TIMEOUT = 5
@@ -14,9 +17,9 @@ class ProfileNotFound(Exception):
 
 
 class Profile(object):
-    """
-    Mojang user profile for Minecraft.
-    """
+
+    """Mojang user profile for Minecraft."""
+
     def __init__(self, uuid=None, username=None):
         if username:
             uuid = self._fetch_uuid_for_username(username)

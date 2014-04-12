@@ -1,9 +1,11 @@
-from app import app, config
-from flask import abort, jsonify, render_template
 from functools import wraps
-from player import Player
-from profile import Profile, ProfileNotFound
-from world import World
+
+from app import app, config
+from app.player import Player
+from app.profile import Profile, ProfileNotFound
+from app.world import World
+
+from flask import abort, jsonify, render_template
 
 
 def wrap_data_access(func):
@@ -30,14 +32,15 @@ def world_html():
     most_deaths = world.players_most_deaths(10)
     usernames = world.usernames()
 
-    return render_template('world.html', config=config, usernames=usernames,
-                           most_online=most_online,
-                           most_broken=most_broken,
-                           most_crafted=most_crafted,
-                           greatest_distance=greatest_distance,
-                           most_kills=most_kills,
-                           most_deaths=most_deaths,
-                           )
+    return render_template(
+        'world.html', config=config, usernames=usernames,
+        most_online=most_online,
+        most_broken=most_broken,
+        most_crafted=most_crafted,
+        greatest_distance=greatest_distance,
+        most_kills=most_kills,
+        most_deaths=most_deaths,
+    )
 
 
 @app.route('/player/<username>.json', methods=['GET'])
@@ -58,9 +61,10 @@ def player_html(username):
     usernames = world.usernames()
     player = world.players[username]
 
-    return render_template('player.html', config=config, usernames=usernames,
-                           player=player,
-                           )
+    return render_template(
+        'player.html', config=config, usernames=usernames,
+        player=player,
+    )
 
 
 @app.route('/player/<username>/profile.json', methods=['GET'])

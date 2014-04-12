@@ -1,7 +1,7 @@
 import os
-import config
-from app import cache
-from player import Player
+
+from app import cache, config
+from app.player import Player
 
 
 class World(object):
@@ -16,7 +16,7 @@ class World(object):
     def _load_all_players(self):
         players = {}
         for filename in os.listdir(config.STATS_DIR_PATH):
-            if filename[-5:] == '.json' and len(filename) > 5:
+            if filename.endswith('.json') and len(filename) > 5:
                 fullpath = os.path.join(config.STATS_DIR_PATH, filename)
                 player = Player(filepath=fullpath)
                 players[player.username] = player
@@ -29,27 +29,33 @@ class World(object):
     def players_most_online(self, count):
         # Weird bug in minecraft! Even though the stat says "playOneMinute",
         # the value is the time in milliminutes. Yes, you read that right.
-        valuefunc = lambda player: player.data['stat']['playOneMinute']/1000
+        def valuefunc(player):
+            return player.data['stat']['playOneMinute']/1000
         return self._get_top_players(count, valuefunc)
 
     def players_most_broken_blocks(self, count):
-        valuefunc = lambda player: sum(player.data['stat']['mineBlock'].values())
+        def valuefunc(player):
+            return sum(player.data['stat']['mineBlock'].values())
         return self._get_top_players(count, valuefunc)
 
     def players_most_crafted_items(self, count):
-        valuefunc = lambda player: sum(player.data['stat']['craftItem'].values())
+        def valuefunc(player):
+            return sum(player.data['stat']['craftItem'].values())
         return self._get_top_players(count, valuefunc)
 
     def players_greatest_distance(self, count):
-        valuefunc = lambda player: sum([value for key, value in player.data['stat'].iteritems() if key[-5:] == 'OneCm'])/1000
+        def valuefunc(player):
+            return sum([value for key, value in player.data['stat'].iteritems() if key.endswith('OneCm')])/1000
         return self._get_top_players(count, valuefunc)
 
     def players_most_kills(self, count):
-        valuefunc = lambda player: sum(kill[1] for kill in player.kills)
+        def valuefunc(player):
+            return sum(kill[1] for kill in player.kills)
         return self._get_top_players(count, valuefunc)
 
     def players_most_deaths(self, count):
-        valuefunc = lambda player: player.data['stat']['deaths'] if isinstance(player.data['stat']['deaths'], int) else 0
+        def valuefunc(player):
+            return player.data['stat']['deaths'] if isinstance(player.data['stat']['deaths'], int) else 0
         return self._get_top_players(count, valuefunc)
 
     def usernames(self):

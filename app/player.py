@@ -1,14 +1,15 @@
-import os
 import json
-import config
+import os
+
+from app import config
 from app.misc import ACHIEVEMENT_NAMES, ENTITY_NAMES
-from util import tree
+from app.util import tree
 
 
 class Player(object):
-    """
-    Representation of a player based on his stats.
-    """
+
+    """Representation of a player based on his stats."""
+
     def __init__(self, username=None, filepath=None):
         if username:
             self.username = username
@@ -30,18 +31,14 @@ class Player(object):
         return os.path.split(filepath)[-1][:-5]
 
     def _load(self):
-        """
-        Load the player's stats data from disk.
-        """
+        """Load the player's stats data from disk."""
         with open(self.filepath, 'r') as f:
             data = json.load(f)
             for key, value in data.iteritems():
                 self._load_stat(key, value)
 
     def _load_stat(self, key, value):
-        """
-        Load this single stat into the data tree.
-        """
+        """Load this single stat into the data tree."""
         subkeys = key.split('.')
         node = self.data
         for subkey in subkeys[0:-1]:

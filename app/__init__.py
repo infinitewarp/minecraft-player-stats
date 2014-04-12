@@ -4,7 +4,7 @@ from beaker.cache import CacheManager
 from beaker.util import parse_cache_config_options
 from flask import Flask
 
-import config
+from app import config
 
 cache_opts = {
     'cache.type': 'file',
