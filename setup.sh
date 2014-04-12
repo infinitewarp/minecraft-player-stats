@@ -6,8 +6,17 @@
 # If you wish to set a custom directory to hold the virtual environment, run:
 # export ENV_DIR="/path/to/your/virtual/environment/directory"
 
+# If you wish to set a custom Python interpreter (such as pypy), run:
+# export PYTHON_EXE="/path/to/your/python/interpreter"
+
 if [ -z "${VIRTUALENV_BIN}" ]; then
     VIRTUALENV_BIN=$(which virtualenv)
+fi
+
+if [ -z "${PYTHON_EXE}" ]; then
+    VIRTUALENV_ARGS=""
+else
+    VIRTUALENV_ARGS="-p ${PYTHON_EXE}"
 fi
 
 if [ -z "${ENV_DIR}" ]; then
@@ -17,7 +26,7 @@ fi
 
 echo "Using ${VIRTUALENV_BIN} to manage environment in ${ENV_DIR}"
 
-${VIRTUALENV_BIN} ${ENV_DIR} || exit 1
+${VIRTUALENV_BIN} ${VIRTUALENV_ARGS} ${ENV_DIR} || exit 1
 source ${ENV_DIR}/bin/activate || exit 1
 
 pip install flask
