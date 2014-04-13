@@ -8,3 +8,10 @@ webappenv
 # pesky mac files
 .DS_Store
 ._*
+
+# other
+.tox
+.cache
+.coverage
+*.egg-info
+MANIFEST

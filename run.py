@@ -8,4 +8,5 @@ except ImportError as e:
     print("WARNING: Did you forget to set up and activate your virtual environment?", file=sys.stderr)
     raise
 
-app.run(host='0.0.0.0', debug=True)
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', debug=True)

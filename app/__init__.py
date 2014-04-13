@@ -17,4 +17,4 @@ cache = CacheManager(**parse_cache_config_options(cache_opts))
 app = Flask(__name__)
 
 # Python linters will complain about the next line. It's OK! Ignore them.
-from app import views
+from app import views  # pragma: no flakes
