@@ -34,7 +34,7 @@ class Player(object):
         """Load the player's stats data from disk."""
         with open(self.filepath, 'r') as f:
             data = json.load(f)
-            for key, value in data.iteritems():
+            for key, value in data.items():
                 self._load_stat(key, value)
 
     def _load_stat(self, key, value):
@@ -51,14 +51,14 @@ class Player(object):
     def achievements(self):
         # TODO How should achievements be sorted?
         # TODO Handle the special 'exploreAllBiomes' achievement
-        return [ACHIEVEMENT_NAMES[name] for name, value in self.data['achievement'].iteritems() if isinstance(value, int) and value > 0]
+        return [ACHIEVEMENT_NAMES[name] for name, value in self.data['achievement'].items() if isinstance(value, int) and value > 0]
 
     @property
     def kills(self):
-        entities = [(ENTITY_NAMES[name], value) for name, value in self.data['stat']['killEntity'].iteritems()]
+        entities = [(ENTITY_NAMES[name], value) for name, value in self.data['stat']['killEntity'].items()]
         return sorted(entities, key=lambda entity: entity[1], reverse=True)
 
     @property
     def killed_by(self):
-        entities = [(ENTITY_NAMES[name], value) for name, value in self.data['stat']['entityKilledBy'].iteritems()]
+        entities = [(ENTITY_NAMES[name], value) for name, value in self.data['stat']['entityKilledBy'].items()]
         return sorted(entities, key=lambda entity: entity[1], reverse=True)

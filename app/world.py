@@ -23,7 +23,7 @@ class World(object):
         return players
 
     def _get_top_players(self, count, valuefunc):
-        players = [(username, valuefunc(player)) for username, player in self.players.iteritems()]
+        players = [(username, valuefunc(player)) for username, player in self.players.items()]
         return sorted(players, key=lambda player: player[1], reverse=True)[0:count]
 
     def players_most_online(self, count):
@@ -45,7 +45,7 @@ class World(object):
 
     def players_greatest_distance(self, count):
         def valuefunc(player):
-            return sum([value for key, value in player.data['stat'].iteritems() if key.endswith('OneCm')])/1000
+            return sum([value for key, value in player.data['stat'].items() if key.endswith('OneCm')])/1000
         return self._get_top_players(count, valuefunc)
 
     def players_most_kills(self, count):
