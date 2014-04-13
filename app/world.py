@@ -30,7 +30,7 @@ class World(object):
         # Weird bug in minecraft! Even though the stat says "playOneMinute",
         # the value is the time in milliminutes. Yes, you read that right.
         def valuefunc(player):
-            return player.data['stat']['playOneMinute']/1000
+            return player.data['stat']['playOneMinute'] / 1000
         return self._get_top_players(count, valuefunc)
 
     def players_most_broken_blocks(self, count):
@@ -45,7 +45,7 @@ class World(object):
 
     def players_greatest_distance(self, count):
         def valuefunc(player):
-            return sum([value for key, value in player.data['stat'].items() if key.endswith('OneCm')])/1000
+            return sum([value for key, value in player.data['stat'].items() if key.endswith('OneCm')]) / 1000
         return self._get_top_players(count, valuefunc)
 
     def players_most_kills(self, count):
