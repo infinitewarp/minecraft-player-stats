@@ -1,9 +1,9 @@
 import json
 import os
 
-from app import config
-from app.misc import ACHIEVEMENT_NAMES, ENTITY_NAMES
-from app.util import tree
+from mcstats import config
+from mcstats.misc import ACHIEVEMENT_NAMES, ENTITY_NAMES
+from mcstats.util import tree
 
 
 class IllegalFileAccessError(IOError):

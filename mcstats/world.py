@@ -1,7 +1,7 @@
 import os
 
-from app import cache, config
-from app.player import Player
+from mcstats import cache, config
+from mcstats.player import Player
 
 
 class World(object):

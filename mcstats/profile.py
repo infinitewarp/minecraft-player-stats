@@ -2,7 +2,7 @@ import json
 
 import requests
 
-from app import app, cache
+from mcstats import app, cache
 
 
 # TODO Load these from config?

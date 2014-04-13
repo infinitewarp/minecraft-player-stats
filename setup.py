@@ -4,9 +4,9 @@
 from setuptools import setup
 
 setup(
-    name="app",
+    name="mcstats",
     version="0.0.1",
-    packages=['app'],
+    packages=['mcstats'],
     install_requires=[
         'flask',
         'beaker',

@@ -1,9 +1,9 @@
 from functools import wraps
 
-from app import app, config
-from app.player import Player
-from app.profile import Profile, ProfileNotFound
-from app.world import World
+from mcstats import app, config
+from mcstats.player import Player
+from mcstats.profile import Profile, ProfileNotFound
+from mcstats.world import World
 
 from flask import abort, jsonify, render_template
 
