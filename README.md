@@ -21,7 +21,7 @@ Because minecraft-player-stats reads player stats from disk instead of interfaci
 Installation
 ------------
 
-Your system must have a reasonably modern version of Python 2.x and virtualenv available. The setup script uses the default "virtualenv" in your path to create and manage a virtual evironment in the local "webappenv" directory. You can override these locations by exporting VIRTUALENV_BIN and ENV_DIR respectively before running the setup script.
+Your system must have a reasonably modern version of Python (successfully tested in 2.6, 2.7, and 3.4) and virtualenv available. The setup script uses the default "virtualenv" in your path to create and manage a virtual evironment in the local "webappenv" directory. You can override these locations by exporting VIRTUALENV_BIN and ENV_DIR respectively before running the setup script.
 
 Running setup with defaults is as simple as:
 ```bash
