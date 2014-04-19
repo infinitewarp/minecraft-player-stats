@@ -1,11 +1,9 @@
 from functools import wraps
 
 from mcstats import app, config
-from mcstats.player import Player
-from mcstats.profile import Profile, ProfileNotFound
 from mcstats.world import World
 
-from flask import abort, jsonify, render_template
+from flask import abort, render_template
 
 
 def wrap_data_access(func):
@@ -43,13 +41,6 @@ def world_html():
     )
 
 
-@app.route('/player/<username>.json', methods=['GET'])
-@wrap_data_access
-def player_json(username):
-    player = Player(username)
-    return jsonify(player.data)
-
-
 @app.route('/player/<username>', methods=['GET'])
 @wrap_data_access
 def player_html(username):
@@ -65,23 +56,3 @@ def player_html(username):
         'player.html', config=config, usernames=usernames,
         player=player,
     )
-
-
-@app.route('/player/<username>/profile.json', methods=['GET'])
-@wrap_data_access
-def player_profile_json(username):
-    try:
-        profile = Profile(username=username)
-    except ProfileNotFound:
-        abort(404)
-    return jsonify(profile.data)
-
-
-@app.route('/profile/<uuid>.json', methods=['GET'])
-@wrap_data_access
-def profile_json_from_uuid(uuid):
-    try:
-        profile = Profile(uuid=uuid)
-    except ProfileNotFound:
-        abort(404)
-    return jsonify(profile.data)
