@@ -1,7 +1,7 @@
 import os
 
 from mcstats import cache, config
-from mcstats.player import Player
+from mcstats.player import load_players
 
 
 class World(object):
@@ -14,13 +14,13 @@ class World(object):
 
     @cache.cache('world_load_all_players', expire=300)
     def _load_all_players(self):
-        players = {}
+        filepaths = []
         for filename in os.listdir(config.STATS_DIR_PATH):
             if filename.endswith('.json') and len(filename) > 5:
-                fullpath = os.path.join(config.STATS_DIR_PATH, filename)
-                player = Player(fullpath)
-                players[player.username] = player
-        return players
+                filepaths.append(os.path.join(config.STATS_DIR_PATH, filename))
+
+        players = load_players(filepaths)
+        return dict([(player.username, player) for player in players])
 
     def _get_top_players(self, count, valuefunc):
         players = [(username, valuefunc(player)) for username, player in self.players.items()]

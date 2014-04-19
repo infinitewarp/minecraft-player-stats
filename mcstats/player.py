@@ -1,3 +1,4 @@
+from threading import Thread
 import json
 import os
 import re
@@ -5,10 +6,6 @@ import re
 from mcstats.misc import ACHIEVEMENT_NAMES, ENTITY_NAMES
 from mcstats.profile import Profile
 from mcstats.util import tree
-
-
-class IllegalFileAccessError(IOError):
-    pass
 
 
 class Player(object):
@@ -73,3 +70,36 @@ class Player(object):
         """Return the names and counts of entities that have killed this player."""
         entities = [(ENTITY_NAMES[name], value) for name, value in self.data['stat']['entityKilledBy'].items()]
         return sorted(entities, key=lambda entity: entity[1], reverse=True)
+
+
+def load_players(filepaths):
+    """
+    Get a list of Players from a list of filepaths.
+    """
+    threads = []
+    for filepath in filepaths:
+        thread = PlayerLoaderThread(filepath)
+        thread.start()
+        threads.append(thread)
+
+    players = []
+    for thread in threads:
+        thread.join()
+        if thread.player:
+            players.append(thread.player)
+
+    return players
+
+
+class PlayerLoaderThread(Thread):
+    """
+    Custom thread to speed up the loading of Player data in parallel because
+    serially requesting data from Mojang for many players can be very slow.
+    """
+    def __init__(self, filepath):
+        super(PlayerLoaderThread, self).__init__()
+        self.filepath = filepath
+        self.player = None
+
+    def run(self):
+        self.player = Player(self.filepath)
