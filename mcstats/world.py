@@ -18,7 +18,7 @@ class World(object):
         for filename in os.listdir(config.STATS_DIR_PATH):
             if filename.endswith('.json') and len(filename) > 5:
                 fullpath = os.path.join(config.STATS_DIR_PATH, filename)
-                player = Player(filepath=fullpath)
+                player = Player(fullpath)
                 players[player.username] = player
         return players
 
