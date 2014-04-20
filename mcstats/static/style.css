@@ -1,0 +1,7 @@
+.avatar {
+    background-color: lightgray;
+    background-image: url(images/steve-faded.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100%;
+}

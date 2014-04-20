@@ -7,6 +7,7 @@
     <title>{% block title %}{% endblock %}</title>
     <link href="//getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="//fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
 </head>
 <body role="document">
 {% block navbar %}{% include 'navbar.html' %}{% endblock %}
