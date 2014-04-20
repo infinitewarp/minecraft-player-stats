@@ -19,3 +19,12 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
+The Software incorporates work covered by the following copyright and
+permission notices:
+
+  Minecraft content and materials are trademarks and copyrights of Mojang
+  and its licensors. The Software is not endorsed by Mojang. All Minecraft
+  content and materials in the Software are used acording to the terms of
+  Mojang's brand guidelines:
+  https://account.mojang.com/documents/brand_guidelines
