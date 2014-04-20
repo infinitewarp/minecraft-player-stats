@@ -1,9 +1,10 @@
 from functools import wraps
 
-from mcstats import app, config
-from mcstats.world import World
-
 from flask import abort, render_template
+
+from mcstats import app, config
+from mcstats.util import pretty_time, pretty_count
+from mcstats.world import World
 
 
 def wrap_data_access(func):
@@ -21,6 +22,13 @@ def wrap_data_access(func):
 def world_html():
     world = World()
 
+    activity_overview = [
+        (pretty_time(world.total_minutes_played, units_count=2), 'Time Played', 'fa fa-clock-o'),
+        (pretty_count(world.total_mob_kills), 'Mobs Killed', 'fa fa-shield'),
+        (pretty_count(world.total_player_deaths), 'Player Deaths', 'fa fa-frown-o'),
+        (pretty_count(world.total_blocks_broken), 'Blocks Mined', 'fa fa-chain-broken')
+    ]
+
     # get the top 10 players for each category
     most_online = world.players_most_online(10)
     most_broken = world.players_most_broken_blocks(10)
@@ -32,6 +40,7 @@ def world_html():
 
     return render_template(
         'world.html', config=config, usernames=usernames,
+        activity_overview=activity_overview,
         most_online=most_online,
         most_broken=most_broken,
         most_crafted=most_crafted,

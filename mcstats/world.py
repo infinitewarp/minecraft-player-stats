@@ -26,11 +26,25 @@ class World(object):
         players = [(username, valuefunc(player)) for username, player in self.players.items()]
         return sorted(players, key=lambda player: player[1], reverse=True)[0:count]
 
+    @property
+    def total_mob_kills(self):
+        return sum(sum(kill[1] for kill in player.kills) for player in self.players.values())
+
+    @property
+    def total_player_deaths(self):
+        return sum(player.deaths for player in self.players.values())
+
+    @property
+    def total_minutes_played(self):
+        return sum(player.data['stat']['playOneMinute'] / 1000 for player in self.players.values())
+
+    @property
+    def total_blocks_broken(self):
+        return sum(sum(player.data['stat']['mineBlock'].values()) for player in self.players.values())
+
     def players_most_online(self, count):
-        # Weird bug in minecraft! Even though the stat says "playOneMinute",
-        # the value is the time in milliminutes. Yes, you read that right.
         def valuefunc(player):
-            return player.data['stat']['playOneMinute'] / 1000
+            return player.play_time_minutes
         return self._get_top_players(count, valuefunc)
 
     def players_most_broken_blocks(self, count):
@@ -55,7 +69,7 @@ class World(object):
 
     def players_most_deaths(self, count):
         def valuefunc(player):
-            return player.data['stat']['deaths'] if isinstance(player.data['stat']['deaths'], int) else 0
+            return player.deaths
         return self._get_top_players(count, valuefunc)
 
     def usernames(self):

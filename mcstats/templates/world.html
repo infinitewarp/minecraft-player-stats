@@ -3,11 +3,25 @@
 {% block title %}World Stats{% endblock %}
 {% block maincontent %}
 <!-- Start main page container -->
-<div class="container-fluid" role="main">
+<div class="container" role="main">
     <!-- What kind of message would be useful here? -->
-    <div class="jumbotron">
-        <h1>{{ config.SERVER_NAME }} Stats! <span class="fa fa-signal"></span></h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    <div class="jumbotron row">
+        <div class="col-md-8 col-sm-7 col-xs-12">
+            <h1>{{ config.SERVER_NAME }} Stats!</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+        <div class="col-md-4 col-sm-5 hidden-xs">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="fa fa-bar-chart-o"></span> Cumulative Player Stats</h3>
+                </div>
+                <div class="list-group">
+                    {% for amount, title, icon_classes in activity_overview %}
+                    <div class="list-group-item"><span class="{{icon_classes}}  hidden-sm"></span> {{title}} <span class="badge">{{amount}}</span></div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- First row of stats -->

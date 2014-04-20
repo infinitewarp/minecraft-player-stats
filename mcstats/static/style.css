@@ -5,3 +5,23 @@
     background-position: center center;
     background-size: 100%;
 }
+
+.container .jumbotron {
+    padding: 10px;
+    border-radius: 0;
+}
+.jumbotron h1, .jumbotron .h1 {
+    font-size: 24px;
+}
+.jumbotron .panel {
+    margin: 0;
+}
+
+@media screen and (min-width: 768px) {
+    .container .jumbotron {
+        padding: 20px;
+    }
+    .jumbotron h1, .jumbotron .h1 {
+        font-size: 36px;
+    }
+}

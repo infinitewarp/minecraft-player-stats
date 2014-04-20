@@ -66,6 +66,17 @@ class Player(object):
         return sorted(entities, key=lambda entity: entity[1], reverse=True)
 
     @property
+    def deaths(self):
+        """Return the number of deaths for this player."""
+        return self.data['stat']['deaths'] if isinstance(self.data['stat']['deaths'], int) else 0
+
+    @property
+    def play_time_minutes(self):
+        # Weird bug in minecraft! Even though the stat says "playOneMinute",
+        # the value is the time in milliminutes. Yes, you read that right.
+        return self.data['stat']['playOneMinute'] / 1000
+
+    @property
     def killed_by(self):
         """Return the names and counts of entities that have killed this player."""
         entities = [(ENTITY_NAMES[name], value) for name, value in self.data['stat']['entityKilledBy'].items()]
